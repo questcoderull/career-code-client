@@ -46,27 +46,14 @@ const AuthProvider = ({ children }) => {
       console.log("user in the auth state change, ", currentUser);
       setLoading(false);
 
-      // jwt related code
+      // jwt reletd code. in 7th video.
       if (currentUser?.email) {
-        const userData = { email: currentUser.email };
-        // axios
-        //   .post("http://localhost:5000/jwt", userData)
-        //   .then((res) => {
-        //     console.log("token after jwt", res.data);
-        //     // code if the we get result.
-
-        //     //first option. we will not use like this. but this is an option.
-        //     // const token = res.data.token;
-        //     // localStorage.setItem("token", token);
-        //   })
-        //   .catch((error) => {
-        //     console.log(error);
-        //   });
-
         axios
-          .post("http://localhost:5000/jwt", userData, {
-            withCredentials: true,
-          })
+          .post(
+            "http://localhost:5000/jwt",
+            { email: currentUser.email },
+            { withCredentials: true }
+          )
           .then((res) => {
             console.log(res.data);
           })
@@ -74,6 +61,35 @@ const AuthProvider = ({ children }) => {
             console.log(error);
           });
       }
+
+      // jwt related code // in 6th video.
+      // if (currentUser?.email) {
+      //   const userData = { email: currentUser.email };
+      //   // axios
+      //   //   .post("http://localhost:5000/jwt", userData)
+      //   //   .then((res) => {
+      //   //     console.log("token after jwt", res.data);
+      //   //     // code if the we get result.
+
+      //   //     //first option. we will not use like this. but this is an option.
+      //   //     // const token = res.data.token;
+      //   //     // localStorage.setItem("token", token);
+      //   //   })
+      //   //   .catch((error) => {
+      //   //     console.log(error);
+      //   //   });
+
+      //   axios
+      //     .post("http://localhost:5000/jwt", userData, {
+      //       withCredentials: true,
+      //     })
+      //     .then((res) => {
+      //       console.log(res.data);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      // }
     });
     return () => {
       unSubscribe();
